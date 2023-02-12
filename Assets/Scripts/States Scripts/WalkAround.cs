@@ -9,7 +9,7 @@ public class WalkAround : CharacterState
 
     public override void OnceExecute()
     {
-        Character.OnCollisionAction += RotateToBack;
+        Character.OnCollisionEnterAction += RotateToBack;
 
         RotateCharacter();
     }
@@ -23,7 +23,7 @@ public class WalkAround : CharacterState
 
     public override void Handle()
     {
-        Character.OnCollisionAction -= RotateToBack;
+        Character.OnCollisionEnterAction -= RotateToBack;
 
         StateChanger.ChangeState(new Idle(Character, StateChanger, StateChanger.RandomValueInRange()));
 

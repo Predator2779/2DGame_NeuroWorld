@@ -8,7 +8,7 @@ public class Character : MonoBehaviour
 
     public delegate void SomeAction();
 
-    public event SomeAction OnCollisionAction;
+    public event SomeAction OnCollisionEnterAction;
 
     private void Start()
     {
@@ -28,8 +28,8 @@ public class Character : MonoBehaviour
     public void RotateTo(Vector3 target)
     {
         ExecuteCommand(new RotationCommand(_rbody.transform, target));
-    } 
-    
+    }
+
     public void RotateByAngle(float angle)
     {
         ExecuteCommandByValue(new RotationCommand(_rbody.transform), angle);
@@ -47,6 +47,6 @@ public class Character : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        OnCollisionAction?.Invoke();
+        OnCollisionEnterAction?.Invoke();
     }
 }
