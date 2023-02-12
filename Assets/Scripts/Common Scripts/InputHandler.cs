@@ -1,5 +1,5 @@
 using UnityEngine;
-using GlobalStringVars;
+using GlobalVars;
 
 public class InputHandler : MonoBehaviour
 {

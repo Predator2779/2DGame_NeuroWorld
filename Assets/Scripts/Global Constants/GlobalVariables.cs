@@ -1,7 +1,9 @@
-namespace GlobalStringVars
+namespace GlobalVars
 {
     public class GlobalVariables
     {
+        #region String Constants
+
         public const string HorizontalAxis = "Horizontal";
         public const string VerticalAxis = "Vertical";
         public const string JumpButton = "Jump";
@@ -14,5 +16,13 @@ namespace GlobalStringVars
         public const string MouseY = "Mouse Y";
 
         public const string MouseScrollWheel = "Mouse ScrollWheel";
+
+        #endregion
+
+        #region Int Constants
+
+        public const int MinHitPoints = 0;
+
+        #endregion
     }
 }
