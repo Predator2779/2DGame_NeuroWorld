@@ -1,10 +1,11 @@
 using UnityEngine;
+using GlobalVars;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Character : MonoBehaviour
 {
     protected Rigidbody2D _rbody;
-    [SerializeField] protected float _movementSpeed;
+    [SerializeField] [Range(0, 60)] protected int _movementSpeed;
 
     public delegate void SomeAction();
 
@@ -22,7 +23,9 @@ public class Character : MonoBehaviour
 
     public void MoveTo(Vector2 movementDirection)
     {
-        ExecuteCommand(new MoveCommand(_rbody, movementDirection * _movementSpeed));
+        int speed = _movementSpeed * GlobalVariables.MovementSpeedFactor;
+
+        ExecuteCommand(new MoveCommand(_rbody, movementDirection * speed));
     }
 
     public void RotateTo(Vector3 target)

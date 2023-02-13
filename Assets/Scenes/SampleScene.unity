@@ -593,7 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655fee44b7d69174189ebe204e2c2ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 200
+  _movementSpeed: 22
 --- !u!58 &1358127654
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -993,7 +993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1358127653}
-  _sensitivity: 30
+  _sensitivity: 5
 --- !u!4 &1625435443
 Transform:
   m_ObjectHideFlags: 0
@@ -1453,7 +1453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655fee44b7d69174189ebe204e2c2ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 100
+  _movementSpeed: 0
 --- !u!50 &2143040033
 Rigidbody2D:
   serializedVersion: 4

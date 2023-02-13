@@ -22,6 +22,8 @@ namespace GlobalVars
         #region Int Constants
 
         public const int MinHitPoints = 0;
+        public const int MovementSpeedFactor = 10;
+        public const int MouseSensitivityFactor = 2;
 
         #endregion
     }

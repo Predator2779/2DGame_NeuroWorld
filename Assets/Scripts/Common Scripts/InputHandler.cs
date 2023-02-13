@@ -4,13 +4,17 @@ using GlobalVars;
 public class InputHandler : MonoBehaviour
 {
     [SerializeField] private Character _player;
-    [SerializeField] private float _sensitivity;
+    [SerializeField] [Range(1, 10)] private int _sensitivity;
 
     private float _xRot = 0;
 
     private void FixedUpdate()
     {
         _player.MoveTo(MovementVector());
+    }
+
+    private void Update()
+    {
         _player.RotateByAngle(MousePosition());
     }
 
@@ -29,7 +33,7 @@ public class InputHandler : MonoBehaviour
 
     private float MousePosition()
     {
-        _xRot -= Input.GetAxis(GlobalVariables.MouseX) * _sensitivity;
+        _xRot -= Input.GetAxis(GlobalVariables.MouseX) * _sensitivity * GlobalVariables.MouseSensitivityFactor;
 
         return _xRot;
     }
