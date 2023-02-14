@@ -22,6 +22,8 @@ namespace GlobalVars
         #region Int Constants
 
         public const int MinHitPoints = 0;
+        public const int HorizontalOffsetInfo = 15;
+        public const int VerticalOffsetInfo = 15;
 
         #endregion
 

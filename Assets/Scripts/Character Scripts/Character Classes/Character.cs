@@ -8,21 +8,16 @@ public class Character : MonoBehaviour
     [SerializeField][Range(0, 60)] protected int _movementSpeed;
 
     public delegate void SomeAction();
-    public event SomeAction OnCollisionEnterAction;
+    public event SomeAction OnPlayerCollisionEnter;
 
     private void Start()
     {
         InitialSetup();
     }
 
-    public virtual void Action()///
-    {
-        
-    }
-
     public void OnCollisionEnter2D(Collision2D collision)///
     {
-        OnCollisionEnterAction?.Invoke();
+        OnPlayerCollisionEnter?.Invoke();
     }
 
     protected void InitialSetup()

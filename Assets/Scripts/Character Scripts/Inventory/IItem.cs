@@ -1,6 +1,8 @@
 public interface IItem
 {
-    public void PickUp(Warrior warrior);
+    string Name { get; }
 
-    public void Put(Warrior warrior);
+    void PickUp(/*Warrior warrior*/);
+
+    void Put(Warrior warrior);
 }

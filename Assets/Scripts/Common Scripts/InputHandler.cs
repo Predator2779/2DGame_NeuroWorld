@@ -3,50 +3,33 @@ using GlobalVars;
 
 public class InputHandler : MonoBehaviour
 {
-    [SerializeField] private Character _player;
-    [SerializeField] private PlayerCursor _cursor;
-
-    [SerializeField][Range(1, 10)] private int _sensitivityX;
-    [SerializeField][Range(1, 10)] private int _sensitivityY;
-
-    private float _posX = 0;
-    private float _posY = 0;
-
-    private void FixedUpdate()
+    public float GetVerticalAxis()
     {
-        _player.MoveTo(MovementVector());
+        return Input.GetAxis(GlobalVariables.VerticalAxis);
+    } 
+    
+    public float GetHorizontallAxis()
+    {
+        return Input.GetAxis(GlobalVariables.HorizontalAxis);
     }
 
-    private void Update()
+    public Vector2 GetMousePosition()
     {
-        _player.RotateByAngle(InputMousePositionX());
-        _cursor.SetPosition(Input.mousePosition);
+        return Input.mousePosition;
     }
 
-    private Vector2 MovementVector()
+    public float GetMousePositionX()
     {
-        var VerticalAxis = Input.GetAxis(GlobalVariables.VerticalAxis);
-        var HorizontalAxis = Input.GetAxis(GlobalVariables.HorizontalAxis);
-
-        var v = _player.transform.up * VerticalAxis;
-        var h = _player.transform.right * HorizontalAxis;
-
-        Vector2 vector = h + v;
-
-        return vector;
+        return Input.GetAxis(GlobalVariables.MouseX) * GlobalVariables.FactorMouseSensitivityX;
     }
 
-    private float InputMousePositionX()
+    public float GetMousePositionY()
     {
-        _posX -= Input.GetAxis(GlobalVariables.MouseX) * _sensitivityX * GlobalVariables.FactorMouseSensitivityX;
-
-        return _posX;
-    }
-
-    private float InputMousePositionY()
+        return Input.GetAxis(GlobalVariables.MouseY) * GlobalVariables.FactorMouseSensitivityY;
+    } 
+    
+    public bool GetE()
     {
-        _posY = Input.GetAxis(GlobalVariables.MouseY) * _sensitivityY * GlobalVariables.FactorMouseSensitivityY;
-
-        return _posY;
+        return Input.GetKeyDown(KeyCode.E);
     }
 }

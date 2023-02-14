@@ -1,5 +1,4 @@
 using GlobalVars;
-using System.Diagnostics;
 
 public class Health : IHealth
 {

@@ -11,9 +11,4 @@ public class Warrior : Character
     {
         _weapon.Fire();
     }
-
-    public override void Action()
-    {
-        base.Action();
-    }
 }
