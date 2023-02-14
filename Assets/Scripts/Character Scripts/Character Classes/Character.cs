@@ -5,15 +5,24 @@ using GlobalVars;
 public class Character : MonoBehaviour
 {
     protected Rigidbody2D _rbody;
-    [SerializeField] [Range(0, 60)] protected int _movementSpeed;
+    [SerializeField][Range(0, 60)] protected int _movementSpeed;
 
     public delegate void SomeAction();
-
     public event SomeAction OnCollisionEnterAction;
 
     private void Start()
     {
         InitialSetup();
+    }
+
+    public virtual void Action()///
+    {
+        
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)///
+    {
+        OnCollisionEnterAction?.Invoke();
     }
 
     protected void InitialSetup()
@@ -23,7 +32,7 @@ public class Character : MonoBehaviour
 
     public void MoveTo(Vector2 movementDirection)
     {
-        int speed = _movementSpeed * GlobalVariables.MovementSpeedFactor;
+        float speed = _movementSpeed * GlobalVariables.FactorMovementSpeed;
 
         ExecuteCommand(new MoveCommand(_rbody, movementDirection * speed));
     }
@@ -46,10 +55,5 @@ public class Character : MonoBehaviour
     protected void ExecuteCommandByValue(Command command, float value)
     {
         command.ExecuteByValue(value);
-    }
-
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        OnCollisionEnterAction?.Invoke();
     }
 }

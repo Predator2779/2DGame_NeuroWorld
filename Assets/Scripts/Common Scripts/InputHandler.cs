@@ -4,9 +4,15 @@ using GlobalVars;
 public class InputHandler : MonoBehaviour
 {
     [SerializeField] private Character _player;
-    [SerializeField] [Range(1, 10)] private int _sensitivity;
+    [SerializeField] private PlayerCursor _cursor;
 
-    private float _xRot = 0;
+    [SerializeField] private bool _cursorVisible = false;
+
+    [SerializeField][Range(1, 10)] private int _sensitivityX;
+    [SerializeField][Range(1, 10)] private int _sensitivityY;
+
+    private float _posX = 0;
+    private float _posY = 0;
 
     private void FixedUpdate()
     {
@@ -15,7 +21,10 @@ public class InputHandler : MonoBehaviour
 
     private void Update()
     {
-        _player.RotateByAngle(MousePosition());
+        _player.RotateByAngle(InputMousePositionX());
+        _cursor.SetPositionY(InputMousePositionY());
+
+        Cursor.visible = _cursorVisible;
     }
 
     private Vector2 MovementVector()
@@ -31,10 +40,17 @@ public class InputHandler : MonoBehaviour
         return vector;
     }
 
-    private float MousePosition()
+    private float InputMousePositionX()
     {
-        _xRot -= Input.GetAxis(GlobalVariables.MouseX) * _sensitivity * GlobalVariables.MouseSensitivityFactor;
+        _posX -= Input.GetAxis(GlobalVariables.MouseX) * _sensitivityX * GlobalVariables.FactorMouseSensitivityX;
 
-        return _xRot;
+        return _posX;
+    }
+
+    private float InputMousePositionY()
+    {
+        _posY = Input.GetAxis(GlobalVariables.MouseY) * _sensitivityY * GlobalVariables.FactorMouseSensitivityY;
+
+        return _posY;
     }
 }
