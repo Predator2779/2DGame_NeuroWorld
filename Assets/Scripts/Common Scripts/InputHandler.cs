@@ -6,8 +6,6 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private Character _player;
     [SerializeField] private PlayerCursor _cursor;
 
-    [SerializeField] private bool _cursorVisible = false;
-
     [SerializeField][Range(1, 10)] private int _sensitivityX;
     [SerializeField][Range(1, 10)] private int _sensitivityY;
 
@@ -22,9 +20,7 @@ public class InputHandler : MonoBehaviour
     private void Update()
     {
         _player.RotateByAngle(InputMousePositionX());
-        _cursor.SetPositionY(InputMousePositionY());
-
-        Cursor.visible = _cursorVisible;
+        _cursor.SetPosition(Input.mousePosition);
     }
 
     private Vector2 MovementVector()
