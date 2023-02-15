@@ -1,35 +1,38 @@
 using UnityEngine;
 using GlobalVars;
 
-public class InputHandler : MonoBehaviour
+namespace InputData
 {
-    public float GetVerticalAxis()
+    public class InputHandler
     {
-        return Input.GetAxis(GlobalVariables.VerticalAxis);
-    } 
-    
-    public float GetHorizontallAxis()
-    {
-        return Input.GetAxis(GlobalVariables.HorizontalAxis);
-    }
+        static public float GetVerticalAxis()
+        {
+            return Input.GetAxis(GlobalVariables.VerticalAxis);
+        }
 
-    public Vector2 GetMousePosition()
-    {
-        return Input.mousePosition;
-    }
+        static public float GetHorizontallAxis()
+        {
+            return Input.GetAxis(GlobalVariables.HorizontalAxis);
+        }
 
-    public float GetMousePositionX()
-    {
-        return Input.GetAxis(GlobalVariables.MouseX) * GlobalVariables.FactorMouseSensitivityX;
-    }
+        static public Vector2 GetMousePosition()
+        {
+            return Input.mousePosition;
+        }
 
-    public float GetMousePositionY()
-    {
-        return Input.GetAxis(GlobalVariables.MouseY) * GlobalVariables.FactorMouseSensitivityY;
-    } 
-    
-    public bool GetE()
-    {
-        return Input.GetKeyDown(KeyCode.E);
+        static public float GetMousePositionX()
+        {
+            return Input.GetAxis(GlobalVariables.MouseX) * GlobalVariables.FactorMouseSensitivityX;
+        }
+
+        static public float GetMousePositionY()
+        {
+            return Input.GetAxis(GlobalVariables.MouseY) * GlobalVariables.FactorMouseSensitivityY;
+        }
+
+        static public bool GetE()
+        {
+            return Input.GetKeyDown(KeyCode.E);
+        }
     }
 }

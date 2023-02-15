@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using GlobalVars;
+using InputData;
 
 public class UIEventHandler : MonoBehaviour
 {
-    [SerializeField] private InputHandler _inputHandler;
-    [SerializeField] private PlayerCursor _cursor;
+    [SerializeField] private ItemHandler _cursor;
     [SerializeField] private Text _objectInfo;
 
     private void Start()
@@ -14,9 +14,9 @@ public class UIEventHandler : MonoBehaviour
         _cursor.OnCursorTriggerExit += RemoveTextInfo;
     }
 
-    private void DisplayObjectInfo(IItem item)
+    private void DisplayObjectInfo(Item item)
     {
-        var mousePos = _inputHandler.GetMousePosition();
+        var mousePos = InputHandler.GetMousePosition();
 
         _objectInfo.rectTransform.position = new Vector2(
             mousePos.x - GlobalVariables.HorizontalOffsetInfo, 
