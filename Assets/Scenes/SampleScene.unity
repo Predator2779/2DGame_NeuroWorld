@@ -259,8 +259,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 25.3396, y: -32.6748}
+  m_SizeDelta: {x: 210.6793, y: 95.3496}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &161838188
 MonoBehaviour:
@@ -1055,6 +1055,8 @@ GameObject:
   - component: {fileID: 1358127656}
   - component: {fileID: 1358127655}
   - component: {fileID: 1358127657}
+  - component: {fileID: 1358127659}
+  - component: {fileID: 1358127658}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1212,6 +1214,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sensitivityX: 5
   _sensitivityY: 5
+--- !u!114 &1358127658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358127649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c9524d865a6e14fbbcd5b6d620e41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectedItem: {fileID: 0}
+--- !u!114 &1358127659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358127649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20155fe1780017d40af59659b40df81c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1388562743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,7 +1793,6 @@ GameObject:
   - component: {fileID: 1761566324}
   - component: {fileID: 1761566326}
   - component: {fileID: 1761566327}
-  - component: {fileID: 1761566325}
   - component: {fileID: 1761566328}
   m_Layer: 0
   m_Name: Player Cursor
@@ -1790,20 +1816,6 @@ Transform:
   m_Father: {fileID: 1358127650}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1761566325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761566323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78c9524d865a6e14fbbcd5b6d620e41c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _selectedItem: {fileID: 0}
-  _gun: {fileID: 0}
 --- !u!212 &1761566326
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2014,7 +2026,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177a4aaa16fda8d4190b81e61a3fe5ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cursor: {fileID: 1761566325}
   _objectInfo: {fileID: 161838188}
 --- !u!1 &1951890963
 GameObject:

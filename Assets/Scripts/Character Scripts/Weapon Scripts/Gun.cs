@@ -11,30 +11,23 @@ public class Gun : Item, IWeapon
         _damage = damage;
     }
 
-    //public string Name { get => _name; }
+    public override string Name { get => _name; }
     public int Damage { get => _damage; set => _damage = Damage; }
 
     public void Fire()
     {
-        Debug.Log("Fire");
+        Debug.Log("Fire!");
     }
 
     public override Item PickUp()
     {
-        return this;
+        print("Picked!");
 
-        //print("Picked!");
-
-        //Destroy(this.gameObject);
-    }
-
-    public Gun Take()
-    {
         return this;
     }
 
-    public override Item Put()
+    public override void Put()
     {
-        return this;
+        print("Put!");
     }
 }

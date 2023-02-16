@@ -5,13 +5,12 @@ using InputData;
 
 public class UIEventHandler : MonoBehaviour
 {
-    [SerializeField] private ItemHandler _cursor;
     [SerializeField] private Text _objectInfo;
 
     private void Start()
     {
-        _cursor.OnCursorTriggerStay += DisplayObjectInfo;
-        _cursor.OnCursorTriggerExit += RemoveTextInfo;
+        EventManager.OnItemSelected.AddListener(DisplayObjectInfo);
+        EventManager.OnItemDeselected.AddListener(RemoveTextInfo);
     }
 
     private void DisplayObjectInfo(Item item)
@@ -19,10 +18,12 @@ public class UIEventHandler : MonoBehaviour
         var mousePos = InputHandler.GetMousePosition();
 
         _objectInfo.rectTransform.position = new Vector2(
-            mousePos.x - GlobalVariables.HorizontalOffsetInfo, 
+            mousePos.x - GlobalVariables.HorizontalOffsetInfo,
             mousePos.y + GlobalVariables.VerticalOffsetInfo);
 
-        _objectInfo.text = $"Подобрать {item.Name}?";
+        _objectInfo.text =
+            $"{item.Name}\n" +
+            $"Е - подобрать";
     }
 
     private void RemoveTextInfo()
