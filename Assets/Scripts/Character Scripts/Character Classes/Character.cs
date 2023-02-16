@@ -1,5 +1,5 @@
 using UnityEngine;
-using GlobalVars;
+using GlobalVariables;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Character : MonoBehaviour
@@ -27,7 +27,7 @@ public class Character : MonoBehaviour
 
     public void MoveTo(Vector2 movementDirection)
     {
-        float speed = _movementSpeed * GlobalVariables.FactorMovementSpeed;
+        float speed = _movementSpeed * GlobalConstants.FactorMovementSpeed;
 
         ExecuteCommand(new MoveCommand(_rbody, movementDirection * speed));
     }

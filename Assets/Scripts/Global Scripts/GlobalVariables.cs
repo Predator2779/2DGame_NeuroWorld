@@ -1,6 +1,8 @@
-namespace GlobalVars
+using UnityEngine;
+
+namespace GlobalVariables
 {
-    public class GlobalVariables
+    public class GlobalConstants
     {
         #region String Constants
 
@@ -32,6 +34,13 @@ namespace GlobalVars
         public const float FactorMovementSpeed = 10f;
         public const float FactorMouseSensitivityX = 2f;
         public const float FactorMouseSensitivityY = 0.3f;
+
+        #endregion
+
+        #region Position
+
+        public static Vector2 WeaponPosition = new Vector2(0.625f, -1.25f);
+        public static Vector2 WeaponRotation = new Vector2(0, 0);
 
         #endregion
     }

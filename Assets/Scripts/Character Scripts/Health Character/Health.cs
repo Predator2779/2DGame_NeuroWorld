@@ -1,8 +1,8 @@
-using GlobalVars;
+using GlobalVariables;
 
 public class Health : IHealth
 {
-    private readonly int _minHitPoints = GlobalVariables.MinHitPoints;
+    private readonly int _minHitPoints = GlobalConstants.MinHitPoints;
 
     private readonly int _maxHitPoints;
     private readonly float _coefDefense;

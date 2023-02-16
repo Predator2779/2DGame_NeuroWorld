@@ -1,28 +1,25 @@
 using UnityEngine;
 
-public class Gun : Item, IWeapon
+public class Weapon : Item, IWeapon
 {
     [SerializeField] private string _name;
     [SerializeField] private int _damage;
-
-    public Gun(string name, int damage)
-    {
-        _name = name;
-        _damage = damage;
-    }
 
     public override string Name { get => _name; }
     public int Damage { get => _damage; set => _damage = Damage; }
 
     public void Fire()
     {
-        Debug.Log("Fire!");
+        print("Fire!");
+    }
+
+    public IWeapon Equip()
+    {
+        return this;
     }
 
     public override Item PickUp()
     {
-        print("Picked!");
-
         return this;
     }
 

@@ -1,28 +1,30 @@
+using GlobalVariables;
 using InputData;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] private IWeapon _leftHand;
-    [SerializeField] private IWeapon _rightHand;
+    private Weapon _weapon;
 
-    private void Start()
+    private void Update()
     {
-        EventManager.OnItemSelected.AddListener(Foo);
+        if (_weapon != null && InputHandler.GetLMB())
+        {
+            _weapon.Fire();
+        }
     }
 
-    private void Foo(Item item)//
+    public void EquipWeapon(Weapon weapon)
     {
-        if (InputHandler.GetE())
-        {
-            if (item.TryGetComponent(out IWeapon weapon)/* || _gun == null*/)
-            {
-                //_gun = weapon;
-            }
-            else
-            {
-                //_selectedItem.PickUp();
-            }
-        }
+        _weapon = weapon;
+
+        PositioningWeapon(_weapon);
+    }
+
+    private void PositioningWeapon(Weapon weapon)
+    {
+        _weapon.transform.position = GlobalConstants.WeaponPosition;
+        _weapon.transform.eulerAngles = GlobalConstants.WeaponRotation;
+        _weapon.transform.SetParent(transform);
     }
 }

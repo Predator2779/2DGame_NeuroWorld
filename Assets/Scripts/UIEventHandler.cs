@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using GlobalVars;
+using GlobalVariables;
 using InputData;
 
 public class UIEventHandler : MonoBehaviour
@@ -18,8 +18,8 @@ public class UIEventHandler : MonoBehaviour
         var mousePos = InputHandler.GetMousePosition();
 
         _objectInfo.rectTransform.position = new Vector2(
-            mousePos.x - GlobalVariables.HorizontalOffsetInfo,
-            mousePos.y + GlobalVariables.VerticalOffsetInfo);
+            mousePos.x - GlobalConstants.HorizontalOffsetInfo,
+            mousePos.y + GlobalConstants.VerticalOffsetInfo);
 
         _objectInfo.text =
             $"{item.Name}\n" +
