@@ -37,15 +37,15 @@ namespace InputData
         
         static public bool GetLMB()
         {
-            return Input.GetMouseButtonDown(0);
+            return Input.GetMouseButton(0);
         } 
         
-        static public bool GetRMB()
+        static public bool GetRMB_Down()
         {
             return Input.GetMouseButtonDown(1);
         }  
         
-        static public bool GetMMB()
+        static public bool GetMMB_Down()
         {
             return Input.GetMouseButtonDown(2);
         }

@@ -8,14 +8,11 @@ public class Weapon : Item, IWeapon
     public override string Name { get => _name; }
     public int Damage { get => _damage; set => _damage = Damage; }
 
-    public void Fire()
+    public void Fire()//
     {
-        print("Fire!");
-    }
+        var bullet = PoolManager.GetObject("Bullet", transform.position, transform.rotation);
 
-    public IWeapon Equip()
-    {
-        return this;
+        bullet.GetComponent<Rigidbody2D>().AddForce(transform.up * _damage, ForceMode2D.Impulse);
     }
 
     public override Item PickUp()
@@ -25,6 +22,6 @@ public class Weapon : Item, IWeapon
 
     public override void Put()
     {
-        print("Put!");
+        
     }
 }

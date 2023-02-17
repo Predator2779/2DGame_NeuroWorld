@@ -39,7 +39,7 @@ namespace GlobalVariables
 
         #region Position
 
-        public static Vector2 WeaponPosition = new Vector2(0.625f, -1.25f);
+        public static Vector2 WeaponPosition = new Vector2(0.5f, 0.25f);
         public static Vector2 WeaponRotation = new Vector2(0, 0);
 
         #endregion
