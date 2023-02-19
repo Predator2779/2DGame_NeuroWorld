@@ -27,7 +27,7 @@ public class Character : MonoBehaviour
 
     public void MoveTo(Vector2 movementDirection)
     {
-        float speed = _movementSpeed * GlobalConstants.FactorMovementSpeed;
+        float speed = _movementSpeed * GlobalConstants.CoefMovementSpeed;
 
         ExecuteCommand(new MoveCommand(_rbody, movementDirection * speed));
     }

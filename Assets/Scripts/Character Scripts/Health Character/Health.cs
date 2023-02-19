@@ -1,9 +1,9 @@
 using GlobalVariables;
+using UnityEngine;
 
 public class Health : IHealth
 {
     private readonly int _minHitPoints = GlobalConstants.MinHitPoints;
-
     private readonly int _maxHitPoints;
     private readonly float _coefDefense;
     private int _hitPoints;
@@ -42,11 +42,13 @@ public class Health : IHealth
 
     private void ApplyValue(float value)
     {
-        if (_hitPoints + value > _maxHitPoints)
+        float hitPoints = _hitPoints + value;
+
+        if (hitPoints > _maxHitPoints)
         {
             _hitPoints = _maxHitPoints;
         }
-        else if (_hitPoints + value < _minHitPoints)
+        else if (hitPoints < _minHitPoints)
         {
             _hitPoints = _minHitPoints;
         }

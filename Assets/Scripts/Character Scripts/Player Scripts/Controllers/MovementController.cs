@@ -9,7 +9,6 @@ public class MovementController : MonoBehaviour
     [SerializeField][Range(1, 10)] private int _sensitivityY;
 
     private float _posX = 0;
-    private float _posY = 0;
 
     private void Start()
     {

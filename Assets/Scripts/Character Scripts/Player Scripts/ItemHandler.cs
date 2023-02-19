@@ -32,7 +32,7 @@ public class ItemHandler : MonoBehaviour
     {
         if (InputHandler.GetKeyE())
         {
-            if (item.TryGetComponent(out Weapon weapon))
+            if (item.TryGetComponent(out Gun weapon))
             {
                 EquipWeapon(weapon);
             }
@@ -43,7 +43,7 @@ public class ItemHandler : MonoBehaviour
         }
     }
 
-    private void EquipWeapon(Weapon weapon)
+    private void EquipWeapon(Gun weapon)
     {
         _weaponController.EquipWeapon(weapon);
     }

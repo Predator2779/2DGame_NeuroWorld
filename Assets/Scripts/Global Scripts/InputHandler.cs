@@ -22,12 +22,12 @@ namespace InputData
 
         static public float GetMousePositionX()
         {
-            return Input.GetAxis(GlobalConstants.MouseX) * GlobalConstants.FactorMouseSensitivityX;
+            return Input.GetAxis(GlobalConstants.MouseX) * GlobalConstants.CoefMouseSensitivityX;
         }
 
         static public float GetMousePositionY()
         {
-            return Input.GetAxis(GlobalConstants.MouseY) * GlobalConstants.FactorMouseSensitivityY;
+            return Input.GetAxis(GlobalConstants.MouseY) * GlobalConstants.CoefMouseSensitivityY;
         }
 
         static public bool GetKeyE()

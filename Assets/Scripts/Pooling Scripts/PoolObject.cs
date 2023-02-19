@@ -7,12 +7,4 @@ public class PoolObject : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)//
-    {
-        if (!collision.gameObject.GetComponent<PoolObject>())
-        {
-            ReturnToPool();
-        }
-    }
 }

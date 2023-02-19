@@ -31,16 +31,20 @@ namespace GlobalVariables
 
         #region Float Constants
 
-        public const float FactorMovementSpeed = 10f;
-        public const float FactorMouseSensitivityX = 2f;
-        public const float FactorMouseSensitivityY = 0.3f;
+        public const float CoefMovementSpeed = 10f;
+        public const float CoefMouseSensitivityX = 2f;
+        public const float CoefMouseSensitivityY = 0.3f;
+        public const float CoefShotRollback = 0.04f;
+        public const float BulletForce = 10f;
+        public const float MinRangeDamage = 0.65f;
+        public const float MaxRangeDamage = 2.01f;
 
         #endregion
 
         #region Position
 
-        public static Vector2 WeaponPosition = new Vector2(0.5f, 0.25f);
-        public static Vector2 WeaponRotation = new Vector2(0, 0);
+        public static Vector2 WeaponPosition = new Vector2(0.65f, 0.25f);
+        public static Vector2 ZeroRotation = new Vector2(0, 0);
 
         #endregion
     }

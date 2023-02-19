@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
+    [SerializeField] private Gun _weapon;
+
     private Warrior _warrior;
-    private Weapon _weapon;
 
     private void Start()
     {
@@ -20,21 +21,21 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    public void EquipWeapon(Weapon weapon)
+    public void EquipWeapon(Gun weapon)
     {
         _weapon = weapon;
 
         PositioningWeapon(_weapon);
     }
 
-    public void UnequipWeapon(Weapon weapon)
+    public void UnequipWeapon(Gun weapon)
     {
         weapon.transform.parent = null;
 
         _weapon = null;
     }
 
-    private void PositioningWeapon(Weapon weapon)//
+    private void PositioningWeapon(Gun weapon)//
     {
         weapon.transform.SetParent(_warrior.transform);
 
