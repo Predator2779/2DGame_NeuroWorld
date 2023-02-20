@@ -3,12 +3,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Warrior : Character
 {
-    [SerializeField] protected IWeapon _weapon;
+    [SerializeField] protected Weapon _weapon;
 
-    public IWeapon Weapon { get { return _weapon; } set { _weapon = value; } }
+    public Weapon Weapon { get { return _weapon; } set { _weapon = value; } }
 
     public void Attack()
     {
-        _weapon.Fire();
+        if (_weapon != null)
+        {
+            _weapon.Fire();
+        }
     }
 }

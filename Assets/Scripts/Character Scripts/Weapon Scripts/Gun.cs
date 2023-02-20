@@ -1,7 +1,7 @@
 using GlobalVariables;
 using UnityEngine;
 
-public class Gun : Item, IWeapon
+public class Gun : Weapon
 {
     [SerializeField] private string _name;
     [SerializeField] private int _damage;
@@ -12,14 +12,14 @@ public class Gun : Item, IWeapon
     private float _timeLeft;
 
     public override string Name { get => _name; }
-    public int Damage { get => _damage; set => _damage = Damage; }
+    public override int Damage { get => _damage; set => _damage = Damage; }
 
     private void FixedUpdate()
     {
         ShootRollback();
     }
 
-    public void Fire()
+    public override void Fire()
     {
         Shoot();
     }

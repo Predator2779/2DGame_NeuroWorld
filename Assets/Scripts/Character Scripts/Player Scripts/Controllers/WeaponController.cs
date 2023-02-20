@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] private Gun _weapon;
-
     private Warrior _warrior;
 
     private void Start()
@@ -15,27 +13,32 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
-        if (_weapon != null && InputHandler.GetLMB())
+        if (InputHandler.GetLMB())/// сделать под ИИ
         {
-            _weapon.Fire();
+            Attack();
         }
+    }
+
+    public void Attack()
+    {
+        _warrior.Attack();
     }
 
     public void EquipWeapon(Gun weapon)
     {
-        _weapon = weapon;
+        _warrior.Weapon = weapon;
 
-        PositioningWeapon(_weapon);
+        PositioningWeapon(weapon);
     }
 
     public void UnequipWeapon(Gun weapon)
     {
         weapon.transform.parent = null;
 
-        _weapon = null;
+        _warrior.Weapon = null;
     }
 
-    private void PositioningWeapon(Gun weapon)//
+    private void PositioningWeapon(Gun weapon)
     {
         weapon.transform.SetParent(_warrior.transform);
 

@@ -1163,6 +1163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 22
+  _weapon: {fileID: 1507027353}
 --- !u!114 &1358127657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1202,7 +1203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20155fe1780017d40af59659b40df81c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapon: {fileID: 1507027353}
 --- !u!1 &1388562743
 GameObject:
   m_ObjectHideFlags: 0
