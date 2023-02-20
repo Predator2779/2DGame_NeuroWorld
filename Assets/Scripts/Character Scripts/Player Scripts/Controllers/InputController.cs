@@ -1,7 +1,7 @@
 using UnityEngine;
 using InputData;
 
-public class MovementController : MonoBehaviour
+public class InputController : MonoBehaviour
 {
     private Character _player;
 

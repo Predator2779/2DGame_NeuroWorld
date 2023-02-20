@@ -1,6 +1,5 @@
 using InputData;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class CursorController : MonoBehaviour
 {
