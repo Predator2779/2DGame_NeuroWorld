@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class ItemHandler : MonoBehaviour
 {
-    private WeaponController _weaponController;
-    [SerializeField] private Item _selectedItem;
+    private Warrior _warrior;
 
-    public Item SelectedItem { get => _selectedItem; }
+    [SerializeField] private Item _selectedItem;
+    [SerializeField] private float _distance;
 
     private void Start()
     {
-        _weaponController= GetComponent<WeaponController>();
+        _warrior = GetComponent<Warrior>();
 
         EventManager.OnItemSelected.AddListener(SelectItem);
         EventManager.OnItemDeselected.AddListener(DeselectItem);
@@ -20,7 +20,7 @@ public class ItemHandler : MonoBehaviour
     {
         _selectedItem = item;
 
-        Take(_selectedItem);
+        PickUpItem(_selectedItem);
     }
 
     private void DeselectItem()
@@ -28,30 +28,19 @@ public class ItemHandler : MonoBehaviour
         _selectedItem = null;
     }
 
-    private void Take(Item item)
+    private void PickUpItem(Item item)
     {
-        if (InputHandler.GetKeyE())
+        if (InputFunctions.GetKeyE())
         {
-            if (item.TryGetComponent(out Gun weapon))
+            if (item.TryGetComponent(out Weapon weapon))
             {
                 EquipWeapon(weapon);
-            }
-            else
-            {
-                PickUpItem(item);
             }
         }
     }
 
-    private void EquipWeapon(Gun weapon)
+    private void EquipWeapon(Weapon weapon)
     {
-        _weaponController.EquipWeapon(weapon);
-    }
-
-    private void PickUpItem(Item item)
-    {
-        // ...
-
-        _selectedItem.PickUp();
+        _warrior.EquipWeapon(weapon);
     }
 }

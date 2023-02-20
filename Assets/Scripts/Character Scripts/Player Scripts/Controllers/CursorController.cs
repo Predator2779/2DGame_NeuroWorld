@@ -6,7 +6,9 @@ public class CursorController : MonoBehaviour
     private void Update()
     {
         SetPosition(GetMousePosition());
-    } 
+    }
+
+    #region Position
 
     private void SetPosition(Vector2 mousePos)
     {
@@ -15,8 +17,12 @@ public class CursorController : MonoBehaviour
 
     private Vector2 GetMousePosition()
     {
-        return Camera.main.ScreenToWorldPoint(InputHandler.GetMousePosition());
+        return Camera.main.ScreenToWorldPoint(InputFunctions.GetMousePosition());
     }
+
+    #endregion
+
+    #region Trigger
 
     private void OnTriggerStay2D(Collider2D obj)
     {
@@ -33,4 +39,6 @@ public class CursorController : MonoBehaviour
             EventManager.OnItemDeselected?.Invoke();
         }
     }
+
+    #endregion
 }

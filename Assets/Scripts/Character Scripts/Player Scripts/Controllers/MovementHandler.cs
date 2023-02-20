@@ -1,7 +1,7 @@
 using UnityEngine;
 using InputData;
 
-public class InputController : MonoBehaviour
+public class MovementHandler : MonoBehaviour
 {
     private Character _player;
 
@@ -27,8 +27,8 @@ public class InputController : MonoBehaviour
 
     private Vector2 GetMovementVector()
     {
-        var VerticalAxis = InputHandler.GetVerticalAxis();
-        var HorizontalAxis = InputHandler.GetHorizontallAxis();
+        var VerticalAxis = InputFunctions.GetVerticalAxis();
+        var HorizontalAxis = InputFunctions.GetHorizontallAxis();
 
         var v = _player.transform.up * VerticalAxis;
         var h = _player.transform.right * HorizontalAxis;
@@ -40,7 +40,7 @@ public class InputController : MonoBehaviour
 
     private float GetAnglePlayerRotation()
     {
-        _posX -= InputHandler.GetMousePositionX() * _sensitivityX;
+        _posX -= InputFunctions.GetMousePositionX() * _sensitivityX;
 
         return _posX;
     }

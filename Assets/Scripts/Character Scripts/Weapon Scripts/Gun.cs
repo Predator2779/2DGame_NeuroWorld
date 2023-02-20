@@ -24,14 +24,9 @@ public class Gun : Weapon
         Shoot();
     }
 
-    public override Item PickUp()
+    public override void Use()
     {
-        return this;
-    }
-
-    public override void Put()
-    {
-
+       
     }
 
     private void Shoot()

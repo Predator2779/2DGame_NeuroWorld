@@ -3,7 +3,7 @@ using GlobalVariables;
 
 namespace InputData
 {
-    public class InputHandler
+    public class InputFunctions
     {
         static public float GetVerticalAxis()
         {
@@ -29,11 +29,6 @@ namespace InputData
         {
             return Input.GetAxis(GlobalConstants.MouseY) * GlobalConstants.CoefMouseSensitivityY;
         }
-
-        static public bool GetKeyE()
-        {
-            return Input.GetKey(KeyCode.E);
-        }
         
         static public bool GetLMB()
         {
@@ -48,6 +43,11 @@ namespace InputData
         static public bool GetMMB_Down()
         {
             return Input.GetMouseButtonDown(2);
+        }
+
+        static public bool GetKeyE()
+        {
+            return Input.GetKey(KeyCode.E);
         }
     }
 }

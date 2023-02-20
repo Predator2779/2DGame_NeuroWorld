@@ -445,8 +445,8 @@ GameObject:
   - component: {fileID: 169322135}
   - component: {fileID: 169322134}
   - component: {fileID: 169322133}
+  - component: {fileID: 169322137}
   - component: {fileID: 169322132}
-  - component: {fileID: 169322131}
   - component: {fileID: 169322130}
   - component: {fileID: 169322129}
   m_Layer: 0
@@ -486,6 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectedItem: {fileID: 0}
+  _distance: 0
 --- !u!114 &169322130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,20 +499,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20155fe1780017d40af59659b40df81c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &169322131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169322127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cf903fa5be28a941863da5f58ec299c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sensitivityX: 5
-  _sensitivityY: 5
 --- !u!114 &169322132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,6 +617,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &169322137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169322127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20e7bf6edfce44b4b9dff792d4ceaa2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minStateChangeTime: 0
+  _maxStateChangeTime: 1.5
+  _currentState: 
+  LifeTime: 0
 --- !u!1 &357684298
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,7 +1398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1193762209
 Transform:
   m_ObjectHideFlags: 0
@@ -1633,6 +1636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectedItem: {fileID: 0}
+  _distance: 0
 --- !u!114 &1358127659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2636,7 +2640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2032311224
 Transform:
   m_ObjectHideFlags: 0

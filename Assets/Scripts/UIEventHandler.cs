@@ -15,7 +15,7 @@ public class UIEventHandler : MonoBehaviour
 
     private void DisplayObjectInfo(Item item)
     {
-        var mousePos = InputHandler.GetMousePosition();
+        var mousePos = InputFunctions.GetMousePosition();
 
         _objectInfo.rectTransform.position = new Vector2(
             mousePos.x - GlobalConstants.HorizontalOffsetInfo,
