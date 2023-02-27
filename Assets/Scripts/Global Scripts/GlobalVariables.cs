@@ -38,6 +38,9 @@ namespace GlobalVariables
         public const float BulletForce = 10f;
         public const float MinRangeDamage = 0.65f;
         public const float MaxRangeDamage = 2.01f;
+        public const float DistanceToTarget = 1.5f;
+        public const float MinStateTime = 0.0f;
+        public const float MaxStateTime = 5.0f;
 
         #endregion
 

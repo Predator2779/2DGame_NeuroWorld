@@ -2,5 +2,5 @@ public abstract class Command
 {
     public abstract void Execute();
 
-    public abstract void ExecuteByValue(float value);
+    public virtual void ExecuteByValue(float value) { }
 }

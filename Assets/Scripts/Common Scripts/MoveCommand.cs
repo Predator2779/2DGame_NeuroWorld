@@ -15,9 +15,4 @@ public class MoveCommand : Command
     {
         _actor.AddForce(_moveDirection);
     }
-
-    public override void ExecuteByValue(float value)//
-    {
-        
-    }
 }

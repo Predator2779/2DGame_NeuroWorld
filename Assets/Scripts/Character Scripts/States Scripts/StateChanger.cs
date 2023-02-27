@@ -1,60 +1,60 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class StateChanger : MonoBehaviour
 {
-    [SerializeField][Range(0.0f, 10.0f)] private float _minStateChangeTime = 0.0f;
-    [SerializeField][Range(0.0f, 10.0f)] private float _maxStateChangeTime = 2.0f;
-    [SerializeField] private string _currentState = "";
+    public string _currentState;//
+    public bool StartPatrolState = false;///
 
-    public float LifeTime;//
-
-    private Character _character;
     private CharacterState _currentCharacterState;
+    private Character _character;
 
     private void Start()
     {
-        InitialSetup();
+        Initialize();
+    }
+
+    private void Update()
+    {
+        MyMethod();///
+
+        _currentCharacterState.LogicUpdate();
     }
 
     private void FixedUpdate()
     {
-        DisplayCurrentState();
-
-        PermanentExecute();
+        _currentCharacterState.PhysicsUpdate();
     }
 
-    private void InitialSetup()
+    private void Initialize()
     {
         _character = GetComponent<Character>();
 
-        _currentCharacterState = new Idle(_character, this, RandomValueInRange());
+        SetState(new IdleState(_character, this));
     }
 
-    private void DisplayCurrentState()
+    public void SetState(CharacterState newState)
     {
-        _currentState = _currentCharacterState.ToString();
-    }  
+        if (_currentCharacterState != null)
+        {
+            _currentCharacterState.ExitState();
 
-    private void PermanentExecute()
-    {
-        _currentCharacterState.PermanentExecute();
+            _currentCharacterState = null;
+        }
+
+        _currentCharacterState = newState;
+
+        _currentCharacterState.EnterState();
     }
 
-    public void OnceExecute()
+    private void MyMethod()///
     {
-        _currentCharacterState.OnceExecute();
-    }
+        _currentState = _currentCharacterState.ToString();//
 
-    public void ChangeState(CharacterState state)
-    {
-        _currentCharacterState = state;
-    }
-    
-    public float RandomValueInRange()
-    {
-        return Random.Range(_minStateChangeTime, _maxStateChangeTime);
+        if (StartPatrolState)
+        {
+            StartPatrolState = false;
+
+            SetState(new PatrolState(_character, this));
+        }
     }
 }

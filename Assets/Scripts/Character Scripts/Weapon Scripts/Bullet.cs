@@ -32,6 +32,21 @@ public class Bullet : MonoBehaviour
         return randValue * _damage;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var obj = collision.gameObject;
+
+        if (IsDamageable(obj))
+        {
+            ApplyDamage(obj);
+        }
+
+        if (!CanRicochet())
+        {
+            ReturnBulletToPool();
+        }
+    }
+
     private bool IsDamageable(GameObject obj)
     {
         if (!obj.GetComponent<Bullet>())
@@ -55,21 +70,6 @@ public class Bullet : MonoBehaviour
         else
         {
             return false;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        var obj = collision.gameObject;
-
-        if (IsDamageable(obj))
-        {
-            ApplyDamage(obj);
-        }
-
-        if (!CanRicochet())
-        {
-            ReturnBulletToPool();
         }
     }
 }

@@ -1,17 +1,23 @@
-public abstract class CharacterState
+using UnityEngine;
+
+public abstract class CharacterState : ScriptableObject
 {
-    protected CharacterState(Character character, StateChanger stateChanger) 
-    { 
-        Character = character;
-        StateChanger = stateChanger;
+    protected CharacterState(Character character, StateChanger stateChanger)
+    {
+        _character = character;
+        _stateChanger = stateChanger;
     }
-    
-    protected Character Character { get; set; }
-    protected StateChanger StateChanger { get; set; }
 
-    public abstract void OnceExecute();
+    protected Character _character;
+    protected StateChanger _stateChanger;
 
-    public abstract void PermanentExecute();
-    
-    public abstract void Handle();
+    public virtual void EnterState() { }
+
+    public abstract void LogicUpdate();
+
+    public virtual void PhysicsUpdate() { }
+
+    public abstract void CheckExecutionCondition();
+
+    public abstract void ExitState();
 }

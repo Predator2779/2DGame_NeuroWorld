@@ -1,9 +1,10 @@
 using UnityEngine;
 using InputData;
 
-public class MovementHandler : MonoBehaviour
+public class InputHandler : MonoBehaviour
 {
     private Character _player;
+    private Warrior _playerWar;
 
     [SerializeField][Range(1, 10)] private int _sensitivityX;
     [SerializeField][Range(1, 10)] private int _sensitivityY;
@@ -12,7 +13,7 @@ public class MovementHandler : MonoBehaviour
 
     private void Start()
     {
-        _player = GetComponent<Character>();
+        Initialize();
     }
 
     private void FixedUpdate()
@@ -22,7 +23,36 @@ public class MovementHandler : MonoBehaviour
 
     private void Update()
     {
+        if (CanAttack())
+        {
+            _playerWar.Attack();
+        }
+
         _player.RotateByAngle(GetAnglePlayerRotation());
+    }
+
+    private void Initialize()
+    {
+        _player = GetComponent<Character>();
+
+        if (TryGetComponent(out Warrior warrior))
+        {
+            _playerWar = warrior;
+        }
+    }
+
+    private bool CanAttack()
+    {
+        var PressedLMB = InputFunctions.GetLMB();
+
+        if (_playerWar != null && PressedLMB)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private Vector2 GetMovementVector()

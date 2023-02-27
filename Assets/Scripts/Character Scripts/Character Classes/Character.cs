@@ -7,20 +7,21 @@ public class Character : MonoBehaviour
     protected Rigidbody2D _rbody;
     [SerializeField][Range(0, 60)] protected int _movementSpeed;
 
-    public delegate void SomeAction();
-    public event SomeAction OnPlayerCollisionEnter;
+    public delegate void SomeAction(Collision2D collision);
+    public event SomeAction OnCollisionEntered;
 
     private void Start()
     {
-        InitialSetup();
+        Initialize();
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)///
+    private void OnCollisionEnter2D(Collision2D collision)//
     {
-        OnPlayerCollisionEnter?.Invoke();
+        print("Enter");
+        OnCollisionEntered?.Invoke(collision);
     }
 
-    protected void InitialSetup()
+    protected void Initialize()
     {
         _rbody = GetComponent<Rigidbody2D>();
     }
