@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class IdleState : CharacterState
 {
+    /// Добавить rotation по таймингу сюда и в патрол.
     private float _lifeTime;
 
     public IdleState(Character character, StateChanger stateChanger)
@@ -15,14 +16,11 @@ public class IdleState : CharacterState
 
     public override void LogicUpdate()
     {
-        Debug.Log("Invoked.LogicUpdate()");//
         CheckExecutionCondition();
     }
 
     public override void PhysicsUpdate()
     {
-        Debug.Log("Invoked.PhysicsUpdate()");//
-        Debug.Log("LifeTime: " + _lifeTime);//
         DecreaseLifeTime();
     }
 
@@ -30,7 +28,6 @@ public class IdleState : CharacterState
     {
         if (_lifeTime <= 0)
         {
-            Debug.Log("LifeTime <= 0; CheckExecuteCondition()");//
             StartPatrolState();
         }
     }
@@ -55,6 +52,6 @@ public class IdleState : CharacterState
 
     public override void ExitState()
     {
-        Debug.Log("Invoked.ExitState()");//
+        _lifeTime = 0;
     }
 }

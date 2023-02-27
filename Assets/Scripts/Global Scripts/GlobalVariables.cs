@@ -1,4 +1,6 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+using UnityEngine.TextCore.Text;
 
 namespace GlobalVariables
 {
@@ -48,6 +50,34 @@ namespace GlobalVariables
 
         public static Vector2 WeaponPosition = new Vector2(0.65f, 0.25f);
         public static Vector2 ZeroRotation = new Vector2(0, 0);
+
+        #endregion
+
+        #region Methods
+
+        public static bool IsAttackRange(Transform character, Transform target)
+        {
+            float currentDistance = Vector2.Distance(character.transform.position, target.transform.position);
+
+            float requiredDistance = DistanceToTarget;
+
+            /// Учитываем влияние размера нашего объекта.
+            requiredDistance *= target.transform.localScale.y * character.transform.localScale.y;
+            /// Погрешность в 1/4 необходимой дистанции.
+            float variation = requiredDistance * 0.25f;
+
+            float minDistance = requiredDistance - variation;
+            float maxDistance = requiredDistance + variation;
+
+            if (minDistance < currentDistance && currentDistance < maxDistance)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         #endregion
     }
