@@ -1,12 +1,16 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class StateChanger : MonoBehaviour
 {
-    public string _currentState;//
+    public string _currentStateString;//
     public bool StartPatrolState = false;///
 
-    private CharacterState _currentCharacterState;
+    [SerializeField] private GameObject _target;
+
     private Character _character;
+
+    private CharacterState _currentState;
 
     private void Start()
     {
@@ -17,12 +21,12 @@ public class StateChanger : MonoBehaviour
     {
         MyMethod();///
 
-        _currentCharacterState.LogicUpdate();
+        _currentState.LogicUpdate();
     }
 
     private void FixedUpdate()
     {
-        _currentCharacterState.PhysicsUpdate();
+        _currentState.PhysicsUpdate();
     }
 
     private void Initialize()
@@ -34,21 +38,21 @@ public class StateChanger : MonoBehaviour
 
     public void SetState(CharacterState newState)
     {
-        if (_currentCharacterState != null)
+        if (_currentState != null)
         {
-            _currentCharacterState.ExitState();
+            _currentState.ExitState();
 
-            _currentCharacterState = null;
+            _currentState = null;
         }
 
-        _currentCharacterState = newState;
+        _currentState = newState;
 
-        _currentCharacterState.EnterState();
+        _currentState.EnterState();
     }
 
     private void MyMethod()///
     {
-        _currentState = _currentCharacterState.ToString();//
+        _currentStateString = _currentState.ToString();//
 
         if (StartPatrolState)
         {
