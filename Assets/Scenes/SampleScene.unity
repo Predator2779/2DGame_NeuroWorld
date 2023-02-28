@@ -617,9 +617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e7bf6edfce44b4b9dff792d4ceaa2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentStateString: 
+  _currentState: 
   StartPatrolState: 0
-  _target: {fileID: 0}
 --- !u!1 &357684298
 GameObject:
   m_ObjectHideFlags: 0
@@ -2392,9 +2391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e7bf6edfce44b4b9dff792d4ceaa2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentStateString: 
+  _currentState: 
   StartPatrolState: 0
-  _target: {fileID: 0}
 --- !u!114 &2143040032
 MonoBehaviour:
   m_ObjectHideFlags: 0

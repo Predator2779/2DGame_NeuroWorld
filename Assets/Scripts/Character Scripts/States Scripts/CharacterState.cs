@@ -19,5 +19,5 @@ public abstract class CharacterState : ScriptableObject
 
     public abstract void CheckExecutionCondition();
 
-    public virtual void ExitState() { }
+    public abstract void ExitState();
 }
