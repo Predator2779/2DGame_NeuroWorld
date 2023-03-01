@@ -1,58 +1,57 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-public class StateChanger : MonoBehaviour
+public class StateChanger : StateMachine
 {
-    public string _currentStateString;//
+    public string _currentState;//
     public bool StartPatrolState = false;///
 
-    [SerializeField] private GameObject _target;
-
+    private CharacterState _startCharacterState;
+    private CharacterState _currentCharacterState;
     private Character _character;
-
-    private CharacterState _currentState;
 
     private void Start()
     {
         Initialize();
+
+        SetState(_startCharacterState);
     }
 
     private void Update()
     {
         MyMethod();///
 
-        _currentState.LogicUpdate();
+        _currentCharacterState.LogicUpdate();
     }
 
     private void FixedUpdate()
     {
-        _currentState.PhysicsUpdate();
+        _currentCharacterState.PhysicsUpdate();
     }
 
-    private void Initialize()
+    protected override void Initialize()
     {
         _character = GetComponent<Character>();
 
-        SetState(new IdleState(_character, this));
+        _startCharacterState = new IdleState(_character, this);
     }
 
-    public void SetState(CharacterState newState)
+    public override void SetState(CharacterState newState)
     {
-        if (_currentState != null)
+        if (_currentCharacterState != null)
         {
-            _currentState.ExitState();
+            _currentCharacterState.ExitState();
 
-            _currentState = null;
+            _currentCharacterState = null;
         }
 
-        _currentState = newState;
+        _currentCharacterState = newState;
 
-        _currentState.EnterState();
+        _currentCharacterState.EnterState();
     }
 
     private void MyMethod()///
     {
-        _currentStateString = _currentState.ToString();//
+        _currentState = _currentCharacterState.ToString();//
 
         if (StartPatrolState)
         {
