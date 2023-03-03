@@ -2,14 +2,14 @@ using UnityEngine;
 
 public abstract class CharacterState : ScriptableObject
 {
-    protected CharacterState(Character character, StateChanger stateChanger)
+    protected CharacterState(Character character, StateMachine stateMachine)
     {
         _character = character;
-        _stateChanger = stateChanger;
+        _stateMachine = stateMachine;
     }
 
     protected Character _character;
-    protected StateChanger _stateChanger;
+    protected StateMachine _stateMachine;
 
     public virtual void EnterState() { }
 

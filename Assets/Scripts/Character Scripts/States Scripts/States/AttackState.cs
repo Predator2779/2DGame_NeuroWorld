@@ -5,8 +5,8 @@ public class AttackState : CharacterState
     private Warrior _warrior;
     private Character _target;
 
-    public AttackState(Character character, StateChanger stateChanger, Character target)
-        : base(character, stateChanger)
+    public AttackState(Character character, StateMachine stateMachine, Character target)
+        : base(character, stateMachine)
     {
         _target = target;
     }
@@ -49,12 +49,12 @@ public class AttackState : CharacterState
 
     private void StartChaseState()
     {
-        _stateChanger.SetState(new ChaseState(_character, _stateChanger, _target));
+        _stateMachine.SetState(new ChaseState(_character, _stateMachine, _target));
     }
 
     private void StartPatrolState()
     {
-        _stateChanger.SetState(new PatrolState(_character, _stateChanger));
+        _stateMachine.SetState(new PatrolState(_character, _stateMachine));
     }
 
     private bool IsAttackRange()

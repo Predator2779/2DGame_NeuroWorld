@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StateChanger : StateMachine
+public class WarriorAI : StateMachine
 {
     public string _currentState;//
     public bool StartPatrolState = false;///

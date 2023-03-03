@@ -6,8 +6,8 @@ public class IdleState : CharacterState
     /// Добавить rotation по таймингу сюда и в патрол.
     private float _lifeTime;
 
-    public IdleState(Character character, StateChanger stateChanger)
-        : base(character, stateChanger) { }
+    public IdleState(Character character, StateMachine stateMachine)
+        : base(character, stateMachine) { }
 
     public override void EnterState()
     {
@@ -34,7 +34,7 @@ public class IdleState : CharacterState
 
     public void StartPatrolState()
     {
-        _stateChanger.SetState(new PatrolState(_character, _stateChanger));
+        _stateMachine.SetState(new PatrolState(_character, _stateMachine));
     }
 
     private void DecreaseLifeTime()

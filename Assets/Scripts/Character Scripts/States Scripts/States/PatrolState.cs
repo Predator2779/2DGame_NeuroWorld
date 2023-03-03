@@ -6,8 +6,8 @@ public class PatrolState : CharacterState
     private Character _target;
     private float _lifeTime;
 
-    public PatrolState(Character character, StateChanger stateChanger)
-        : base(character, stateChanger) { }
+    public PatrolState(Character character, StateMachine stateMachine)
+        : base(character, stateMachine) { }
 
     public override void EnterState()
     {
@@ -44,12 +44,12 @@ public class PatrolState : CharacterState
 
     public void StartIdleState()
     {
-        _stateChanger.SetState(new IdleState(_character, _stateChanger));
+        _stateMachine.SetState(new IdleState(_character, _stateMachine));
     }
 
     public void StartChaseState(Character target)
     {
-        _stateChanger.SetState(new ChaseState(_character, _stateChanger, target));
+       _stateMachine.SetState(new ChaseState(_character, _stateMachine, target));
     }
 
     private void DecreaseLifeTime()

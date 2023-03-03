@@ -7,7 +7,7 @@ public class SearchState : CharacterState
     private Vector3 _lastTargetPosition;
     private float _lifeTime;
 
-    public SearchState(Character character, StateChanger stateChanger, Vector3 lastTargetPosition) : base(character, stateChanger)
+    public SearchState(Character character, StateMachine stateMachine, Vector3 lastTargetPosition) : base(character, stateMachine)
     {
         _lastTargetPosition = lastTargetPosition;
     }
@@ -48,12 +48,12 @@ public class SearchState : CharacterState
 
     private void StartChaseState()
     {
-        _stateChanger.SetState(new ChaseState(_character, _stateChanger, _target));
+        _stateMachine.SetState(new ChaseState(_character, _stateMachine, _target));
     }
 
     private void StartPatrolState()
     {
-        _stateChanger.SetState(new PatrolState(_character, _stateChanger));
+       _stateMachine.SetState(new PatrolState(_character, _stateMachine));
     }
 
     private void DecreaseLifeTime()

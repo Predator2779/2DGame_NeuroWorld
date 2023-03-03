@@ -6,7 +6,7 @@ public class ChaseState : CharacterState
     private Character _target;
     private Vector3 _lastTargetPosition;
 
-    public ChaseState(Character character, StateChanger stateChanger, Character target) : base(character, stateChanger)
+    public ChaseState(Character character, StateMachine stateMachine, Character target) : base(character, stateMachine)
     {
         _target = target;
     }
@@ -51,12 +51,12 @@ public class ChaseState : CharacterState
 
     private void StartAttackState()
     {
-        _stateChanger.SetState(new AttackState(_character, _stateChanger, _target));
+        _stateMachine.SetState(new AttackState(_character, _stateMachine, _target));
     }
 
     private void StartSearchState()
     {
-        _stateChanger.SetState(new SearchState(_character, _stateChanger, _lastTargetPosition));
+        _stateMachine.SetState(new SearchState(_character, _stateMachine, _lastTargetPosition));
     }
 
     private void RecordLastTargetPosition()
