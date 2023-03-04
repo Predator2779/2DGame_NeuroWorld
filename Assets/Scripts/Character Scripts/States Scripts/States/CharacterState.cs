@@ -11,7 +11,7 @@ public abstract class CharacterState : ScriptableObject
     protected Character _character;
     protected StateMachine _stateMachine;
 
-    public virtual void EnterState() { }
+    public abstract void EnterState();
 
     public abstract void LogicUpdate();
 
@@ -19,5 +19,5 @@ public abstract class CharacterState : ScriptableObject
 
     public abstract void CheckExecutionCondition();
 
-    public virtual void ExitState() { }
+    public abstract void ExitState();
 }

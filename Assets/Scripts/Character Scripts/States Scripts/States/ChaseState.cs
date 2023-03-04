@@ -24,6 +24,8 @@ public class ChaseState : CharacterState
     public override void PhysicsUpdate()
     {
         ChaseTarget();
+
+        RecordLastTargetPosition();
     }
 
     public override void CheckExecutionCondition()

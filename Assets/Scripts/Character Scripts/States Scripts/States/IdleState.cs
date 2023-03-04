@@ -12,6 +12,8 @@ public class IdleState : CharacterState
     public override void EnterState()
     {
         _lifeTime = RandomStateTime();
+
+        throw new System.Exception("The 'Character' object is missing the 'Warrior' component!");
     }
 
     public override void LogicUpdate()

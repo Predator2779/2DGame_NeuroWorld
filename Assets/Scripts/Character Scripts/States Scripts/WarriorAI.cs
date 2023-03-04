@@ -1,9 +1,11 @@
-using UnityEngine;
-
 public class WarriorAI : StateMachine
 {
-    public string _currentState;//
-    public bool StartPatrolState = false;///
+    #region Debug
+
+    public string _currentState;
+    public bool StartPatrolState = false;
+
+    #endregion
 
     private CharacterState _startCharacterState;
     private CharacterState _currentCharacterState;
@@ -18,7 +20,7 @@ public class WarriorAI : StateMachine
 
     private void Update()
     {
-        MyMethod();///
+        DebugExecute();///
 
         _currentCharacterState.LogicUpdate();
     }
@@ -49,9 +51,9 @@ public class WarriorAI : StateMachine
         _currentCharacterState.EnterState();
     }
 
-    private void MyMethod()///
+    private void DebugExecute()
     {
-        _currentState = _currentCharacterState.ToString();//
+        _currentState = _currentCharacterState.ToString();
 
         if (StartPatrolState)
         {
