@@ -1,21 +1,29 @@
-using GlobalVariables;
 using UnityEngine;
 
-public class PatrolState : CharacterState
+[CreateAssetMenu(fileName = "New PatrolState",
+    menuName = "Scriptable Objects/Character States/Patrol State", order = 1)]
+public class PatrolState : WarriorState
 {
+    public float LifeTime;
+
     private Character _target;
     private float _lifeTime;
+    private Character _character;
+    private StateMachine _stateMachine;
 
-    public PatrolState(Character character, StateMachine stateMachine)
-        : base(character, stateMachine) { }
-
-    public override void EnterState()
+    public override void EnterState(Character character)
     {
+        _character = character;
+        _stateMachine = character.GetComponent<StateMachine>();
+        _lifeTime = LifeTime;
+
         //_character.OnCollisionEntered += StepAside;
+        RotateCharacter(RandomAngle(0.0f, 360.0f));//
+    }
 
-        _lifeTime = RandomStateTime();
-
-        RotateCharacter(RandomAngle(0.0f, 360.0f));
+    public override void SetTarget(Character target)
+    {
+        _target = target;
     }
 
     public override void LogicUpdate()
@@ -30,7 +38,7 @@ public class PatrolState : CharacterState
         _character.MoveTo(_character.transform.up);
     }
 
-    public override void CheckExecutionCondition()
+    protected override void CheckExecutionCondition()
     {
         if (_lifeTime <= 0)
         {
@@ -42,14 +50,23 @@ public class PatrolState : CharacterState
         }
     }
 
-    public void StartIdleState()
+    private void StartIdleState()
     {
-        _stateMachine.SetState(new IdleState(_character, _stateMachine));
+        _stateMachine.SetState(_stateMachine.Idle);
     }
 
-    public void StartChaseState(Character target)
+    private void StartChaseState(Character target)//
     {
-       _stateMachine.SetState(new ChaseState(_character, _stateMachine, target));
+        if (_stateMachine.TryGetComponent(out WarriorAI warriorAI))
+        {
+            warriorAI.SetState(warriorAI.Chase, target);
+
+            ExitState();
+        }
+        else
+        {
+            StartIdleState();
+        }
     }
 
     private void DecreaseLifeTime()
@@ -81,18 +98,8 @@ public class PatrolState : CharacterState
         return Random.Range(minAngle, maxAngle);
     }
 
-    private float RandomStateTime()
+    protected override void ExitState()
     {
-        var minStateTime = GlobalConstants.MinStateTime;
-        var maxStateTime = GlobalConstants.MaxStateTime;
-
-        return Random.Range(minStateTime, maxStateTime);
-    }
-
-    public override void ExitState()
-    {
-        _lifeTime = 0;
-
         //_character.OnCollisionEntered -= StepAside;
     }
 }

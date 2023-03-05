@@ -1,20 +1,32 @@
-using GlobalVariables;
 using UnityEngine;
 
-public class SearchState : CharacterState
+[CreateAssetMenu(fileName = "New SearchState",
+    menuName = "Scriptable Objects/Character States/Search State", order = 1)]
+public class SearchState : WarriorState
 {
-    private Character _target;
-    private Vector3 _lastTargetPosition;
-    private float _lifeTime;
+    public float LifeTime;
 
-    public SearchState(Character character, StateMachine stateMachine, Vector3 lastTargetPosition) : base(character, stateMachine)
+    private float _lifeTime;
+    private Vector3 _lastTargetPosition;
+    private Character _target;
+    private Warrior _warrior;
+    private WarriorAI _warriorAI;
+
+    public override void SetTarget(Character target)
     {
-        _lastTargetPosition = lastTargetPosition;
+        _target = target;
     }
 
-    public override void EnterState()
+    public void SetLastTargetPosition(Vector3 position)
     {
-        _lifeTime = RandomStateTime();
+        _lastTargetPosition = position;
+    }
+
+    public override void EnterState(Character character)
+    {
+        _warrior = character.GetComponent<Warrior>();
+        _warriorAI = character.GetComponent<WarriorAI>();
+        _lifeTime = LifeTime;
     }
 
     public override void LogicUpdate()
@@ -29,7 +41,7 @@ public class SearchState : CharacterState
         DecreaseLifeTime();
     }
 
-    public override void CheckExecutionCondition()
+    protected override void CheckExecutionCondition()
     {
         if (_lifeTime <= 0)
         {
@@ -37,40 +49,27 @@ public class SearchState : CharacterState
         }
         else if (_target != null)
         {
-            StartChaseState();
+            StartChaseState(_target);
         }
     }
 
     private void SearchTarget()
     {
-        _character.MoveTo(_lastTargetPosition);
+        _warrior.MoveTo(_lastTargetPosition);
     }
 
-    private void StartChaseState()
+    private void StartChaseState(Character target)
     {
-        _stateMachine.SetState(new ChaseState(_character, _stateMachine, _target));
+        _warriorAI.SetState(_warriorAI.Chase, target);
     }
 
     private void StartPatrolState()
     {
-       _stateMachine.SetState(new PatrolState(_character, _stateMachine));
+        _warriorAI.SetState(_warriorAI.Patrol);
     }
 
     private void DecreaseLifeTime()
     {
         _lifeTime -= Time.deltaTime;
-    }
-
-    private float RandomStateTime()
-    {
-        var minStateTime = GlobalConstants.MinStateTime;
-        var maxStateTime = GlobalConstants.MaxStateTime;
-
-        return Random.Range(minStateTime, maxStateTime);
-    }
-
-    public override void ExitState()
-    {
-        _lifeTime = 0;
     }
 }

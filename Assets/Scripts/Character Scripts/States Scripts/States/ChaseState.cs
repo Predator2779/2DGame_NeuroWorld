@@ -1,19 +1,28 @@
 using GlobalVariables;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class ChaseState : CharacterState
+[CreateAssetMenu(fileName = "New ChaseState",
+    menuName = "Scriptable Objects/Character States/Chase State", order = 1)]
+public class ChaseState : WarriorState
 {
-    private Character _target;
+    public Character Target { get; private set; }
     private Vector3 _lastTargetPosition;
 
-    public ChaseState(Character character, StateMachine stateMachine, Character target) : base(character, stateMachine)
+    private Warrior _warrior;
+    private WarriorAI _warriorAI;
+
+    public override void EnterState(Character character)
     {
-        _target = target;
+        _warrior = character.GetComponent<Warrior>();
+        _warriorAI = character.GetComponent<WarriorAI>();
+
+        //_character.OnCollisionEntered += StepAside;
     }
 
-    public override void EnterState()
+    public override void SetTarget(Character target)
     {
-        //_character.OnCollisionEntered += StepAside;
+        Target = target;
     }
 
     public override void LogicUpdate()
@@ -28,14 +37,14 @@ public class ChaseState : CharacterState
         RecordLastTargetPosition();
     }
 
-    public override void CheckExecutionCondition()
+    protected override void CheckExecutionCondition()
     {
         if (IsAttackRange())
         {
-            StartAttackState();
+            StartAttackState(Target);
         }
 
-        if (_target == null)
+        if (Target == null)
         {
             StartSearchState();
         }
@@ -43,35 +52,40 @@ public class ChaseState : CharacterState
 
     private void ChaseTarget()
     {
-        _character.MoveTo(MovementDirection());
+        _warrior.MoveTo(MovementDirection());
     }
 
     private bool IsAttackRange()
     {
-        return GlobalConstants.IsAttackRange(_character.transform, _target.transform);
+        return GlobalConstants.IsAttackRange(_warrior.transform, Target.transform);
     }
 
-    private void StartAttackState()
+    private void StartAttackState(Character target)
     {
-        _stateMachine.SetState(new AttackState(_character, _stateMachine, _target));
+        _warriorAI.SetState(_warriorAI.Chase, target);
+
+        ExitState();
     }
 
     private void StartSearchState()
     {
-        _stateMachine.SetState(new SearchState(_character, _stateMachine, _lastTargetPosition));
+        _warriorAI.SetState(_warriorAI.Search);
+        _warriorAI.Search.GetComponent<SearchState>().SetLastTargetPosition(_lastTargetPosition);
+
+        ExitState();
     }
 
     private void RecordLastTargetPosition()
     {
-        if (_target != null)
+        if (Target != null)
         {
-            _lastTargetPosition = _target.transform.position;
+            _lastTargetPosition = Target.transform.position;
         }
     }
 
     private Vector3 MovementDirection()
     {
-        return _target.transform.position;
+        return Target.transform.position;
     }
 
     //private void RotateCharacter(float angle)
@@ -94,7 +108,7 @@ public class ChaseState : CharacterState
     //    return Random.Range(minAngle, maxAngle);
     //}
 
-    public override void ExitState()
+    protected override void ExitState()
     {
         //_character.OnCollisionEntered -= StepAside;
     }

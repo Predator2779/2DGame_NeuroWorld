@@ -1,28 +1,25 @@
 using GlobalVariables;
+using UnityEngine;
 
-public class AttackState : CharacterState
+[CreateAssetMenu(fileName = "New AttackState",
+    menuName = "Scriptable Objects/Character States/Attack State", order = 1)]
+public class AttackState : WarriorState
 {
-    private Warrior _warrior;
     private Character _target;
+    private Warrior _warrior;
+    private WarriorAI _warriorAI;
 
-    public AttackState(Character character, StateMachine stateMachine, Character target)
-        : base(character, stateMachine)
+    public override void EnterState(Character character)
     {
-        _target = target;
+        _warrior = character.GetComponent<Warrior>();
+        _warriorAI = character.GetComponent<WarriorAI>();
+
+        //_character.OnCollisionEntered += StepAside;
     }
 
-    public override void EnterState()
+    public override void SetTarget(Character target)
     {
-        if (_character.TryGetComponent(out Warrior warrior))
-        {
-            _warrior = warrior;
-        }
-        else
-        {
-            StartChaseState();
-
-            throw new System.Exception("The 'Character' object is missing the 'Warrior' component!");      
-        }
+        _target = target;
     }
 
     public override void LogicUpdate()
@@ -30,7 +27,7 @@ public class AttackState : CharacterState
         AttackTarget();
     }
 
-    public override void CheckExecutionCondition()
+    protected override void CheckExecutionCondition()
     {
         if (_target == null)
         {
@@ -38,7 +35,7 @@ public class AttackState : CharacterState
         }
         else if (!IsAttackRange())
         {
-            StartChaseState();
+            StartChaseState(_target);
         }
     }
 
@@ -47,23 +44,18 @@ public class AttackState : CharacterState
         _warrior.Attack();
     }
 
-    private void StartChaseState()
+    private void StartChaseState(Character target)
     {
-        _stateMachine.SetState(new ChaseState(_character, _stateMachine, _target));
+        _warriorAI.SetState(_warriorAI.Chase, target);
     }
 
     private void StartPatrolState()
     {
-        _stateMachine.SetState(new PatrolState(_character, _stateMachine));
+        _warriorAI.SetState(_warriorAI.Patrol);
     }
 
     private bool IsAttackRange()
     {
-        return GlobalConstants.IsAttackRange(_character.transform, _target.transform);
-    }
-
-    public override void ExitState()
-    {
-        
+        return GlobalConstants.IsAttackRange(_warrior.transform, _target.transform);
     }
 }

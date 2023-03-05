@@ -1,19 +1,22 @@
-using GlobalVariables;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New IdleState", 
+    menuName = "Scriptable Objects/Character States/Idle State", order = 1)]
 public class IdleState : CharacterState
 {
     /// Добавить rotation по таймингу сюда и в патрол.
+
+    public float LifeTime;
+
     private float _lifeTime;
+    private StateMachine _stateMachine;
 
-    public IdleState(Character character, StateMachine stateMachine)
-        : base(character, stateMachine) { }
-
-    public override void EnterState()
+    public override void EnterState(Character character)
     {
-        _lifeTime = RandomStateTime();
+        _stateMachine = character.GetComponent<StateMachine>();
+        _lifeTime = LifeTime;
 
-        throw new System.Exception("The 'Character' object is missing the 'Warrior' component!");
+        throw new System.Exception("The 'Character' object is missing the 'Warrior' component!");//
     }
 
     public override void LogicUpdate()
@@ -26,7 +29,7 @@ public class IdleState : CharacterState
         DecreaseLifeTime();
     }
 
-    public override void CheckExecutionCondition()
+    protected override void CheckExecutionCondition()
     {
         if (_lifeTime <= 0)
         {
@@ -34,26 +37,13 @@ public class IdleState : CharacterState
         }
     }
 
-    public void StartPatrolState()
+    private void StartPatrolState()
     {
-        _stateMachine.SetState(new PatrolState(_character, _stateMachine));
+        _stateMachine.SetState(_stateMachine.Patrol);
     }
 
     private void DecreaseLifeTime()
     {
         _lifeTime -= Time.deltaTime;
-    }
-
-    private float RandomStateTime()
-    {
-        var minStateTime = GlobalConstants.MinStateTime;
-        var maxStateTime = GlobalConstants.MaxStateTime;
-
-        return Random.Range(minStateTime, maxStateTime);
-    }
-
-    public override void ExitState()
-    {
-        _lifeTime = 0;
     }
 }
