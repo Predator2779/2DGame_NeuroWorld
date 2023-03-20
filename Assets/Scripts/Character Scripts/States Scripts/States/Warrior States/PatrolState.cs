@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New PatrolState",
-    menuName = "Scriptable Objects/Character States/Patrol State", order = 1)]
+[CreateAssetMenu(fileName = "Patrol",
+    menuName = "Scriptable Objects/States/Warrior States/Patrol State", order = 1)]
 public class PatrolState : WarriorState
 {
     public float LifeTime;
@@ -17,13 +17,17 @@ public class PatrolState : WarriorState
         _stateMachine = character.GetComponent<StateMachine>();
         _lifeTime = LifeTime;
 
-        //_character.OnCollisionEntered += StepAside;
-        RotateCharacter(RandomAngle(0.0f, 360.0f));//
+        _character.RotateByAngle(_character.RandomAngle(0.0f, 360.0f));
     }
 
     public override void SetTarget(Character target)
     {
         _target = target;
+    }
+
+    public override void TargetIsGone()
+    {
+        _target = null;
     }
 
     public override void LogicUpdate()
@@ -35,7 +39,12 @@ public class PatrolState : WarriorState
     {
         DecreaseLifeTime();
 
-        _character.MoveTo(_character.transform.up);
+        Patrol();
+    }
+
+    private void Patrol()
+    {
+        _character.MoveTo(_character.transform.up.normalized);
     }
 
     protected override void CheckExecutionCondition()
@@ -47,7 +56,7 @@ public class PatrolState : WarriorState
         else if (_target != null)
         {
             StartChaseState(_target);
-        }
+        }     
     }
 
     private void StartIdleState()
@@ -55,13 +64,12 @@ public class PatrolState : WarriorState
         _stateMachine.SetState(_stateMachine.Idle);
     }
 
-    private void StartChaseState(Character target)//
+    private void StartChaseState(Character target)
     {
         if (_stateMachine.TryGetComponent(out WarriorAI warriorAI))
         {
-            warriorAI.SetState(warriorAI.Chase, target);
-
-            ExitState();
+            warriorAI.SetState(warriorAI.Chase);
+            warriorAI.SetTarget(target);
         }
         else
         {
@@ -72,34 +80,5 @@ public class PatrolState : WarriorState
     private void DecreaseLifeTime()
     {
         _lifeTime -= Time.deltaTime;
-    }
-
-    private void RotateCharacter(float angle)
-    {
-        _character.RotateByAngle(angle);
-    }
-
-    //private void StepAside(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag != "Player")//
-    //    {
-    //        var angle = _character.transform.rotation.eulerAngles.z + RandomAngle(90.0f, 270.0f);
-
-    //        RotateCharacter(angle);
-    //    }
-    //    else
-    //    {
-    //        StartPursuitState(collision.gameObject.GetComponent<Character>());
-    //    }
-    //}
-
-    private float RandomAngle(float minAngle, float maxAngle)
-    {
-        return Random.Range(minAngle, maxAngle);
-    }
-
-    protected override void ExitState()
-    {
-        //_character.OnCollisionEntered -= StepAside;
     }
 }

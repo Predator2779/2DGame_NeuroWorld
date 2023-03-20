@@ -7,18 +7,18 @@ public class RotationCommand : Command
         _rotatableObj = RotatableObj;
     }
 
-    public RotationCommand(Transform RotatableObj, Vector3 TargetObj)
+    public RotationCommand(Transform RotatableObj, Vector2 TargetObj)
     {
         _rotatableObj = RotatableObj;
         _targetObj = TargetObj;
     }
 
     private Transform _rotatableObj;
-    private Vector3 _targetObj;
+    private Vector2 _targetObj;
 
     public override void Execute()
     {
-        var angle = Vector2.Angle(Vector2.right, _targetObj - _rotatableObj.position);
+        var angle = Vector2.Angle(Vector2.right, _targetObj - (Vector2)_rotatableObj.position);
 
         var newAngle = _rotatableObj.position.y < _targetObj.y ? (angle - 90.0f) : (-angle - 90.0f);
 

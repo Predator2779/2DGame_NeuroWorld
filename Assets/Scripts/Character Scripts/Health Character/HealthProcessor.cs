@@ -8,14 +8,19 @@ public class HealthProcessor : MonoBehaviour, IHealth
 
     private Health _health;
 
-    private void Start()
+    private void OnEnable()
     {
-        _health = new Health(_maxHitPoints, _coefDefense);
+        Initialize();
     }
 
     private void Update()
     {
         _hitPoints = GetCurrentHitPoints();
+    }
+
+    private void Initialize()
+    {
+        _health = new Health(_maxHitPoints, _coefDefense);
     }
 
     public void TakeDamage(float damage)

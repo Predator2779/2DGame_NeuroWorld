@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New IdleState", 
-    menuName = "Scriptable Objects/Character States/Idle State", order = 1)]
+[CreateAssetMenu(fileName = "Idle", 
+    menuName = "Scriptable Objects/States/Character States/Idle State", order = 1)]
 public class IdleState : CharacterState
 {
     /// Добавить rotation по таймингу сюда и в патрол.
@@ -15,8 +15,6 @@ public class IdleState : CharacterState
     {
         _stateMachine = character.GetComponent<StateMachine>();
         _lifeTime = LifeTime;
-
-        throw new System.Exception("The 'Character' object is missing the 'Warrior' component!");//
     }
 
     public override void LogicUpdate()

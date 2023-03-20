@@ -1,6 +1,4 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.TextCore.Text;
 
 namespace GlobalVariables
 {
@@ -33,7 +31,7 @@ namespace GlobalVariables
 
         #region Float Constants
 
-        public const float CoefMovementSpeed = 10f;
+        public const float CoefMovementSpeed = 20f;
         public const float CoefMouseSensitivityX = 2f;
         public const float CoefMouseSensitivityY = 0.3f;
         public const float CoefShotRollback = 0.04f;

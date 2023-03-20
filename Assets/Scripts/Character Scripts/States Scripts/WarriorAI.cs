@@ -1,17 +1,9 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(Character))]
 public class WarriorAI : StateMachine
 {
-    #region Debug
-
-    //public string _currentState;
-    //public bool StartPatrolState = false;
-
-    #endregion
-
-    public CharacterState _currentCharacterState;
-    public CharacterState _startCharacterState;
+    private Character _character;
 
     [Header("Warrior States:")]
 
@@ -19,7 +11,9 @@ public class WarriorAI : StateMachine
     public WarriorState Attack;
     public WarriorState Search;
 
-    private Character _character;
+    [Header("Setting State:")]
+    [SerializeField] private CharacterState _currentCharacterState;
+    public CharacterState _startCharacterState;
 
     private void Start()
     {
@@ -30,8 +24,6 @@ public class WarriorAI : StateMachine
 
     private void Update()
     {
-        DebugExecute();///
-
         _currentCharacterState.LogicUpdate();
     }
 
@@ -51,27 +43,34 @@ public class WarriorAI : StateMachine
 
         _currentCharacterState.EnterState(_character);
     } 
-    
-    public void SetState(CharacterState newState, Character target)
+       
+    public void SetTarget(Character target)
     {
-        _currentCharacterState = newState;
+        WarriorState warriorState;
 
-        _currentCharacterState.EnterState(_character);
+        if (_currentCharacterState is WarriorState)
+        {
+            warriorState = (WarriorState)_currentCharacterState;
 
-        var currentWarState = _currentCharacterState.GetComponent<WarriorState>();
+            warriorState.SetTarget(target);
+        }
+        else
+        {
+            SetState(Chase);
 
-        currentWarState.SetTarget(target);
+            warriorState = (WarriorState)_currentCharacterState;
+        }
+
+        warriorState.SetTarget(target);
     }
 
-    private void DebugExecute()
+    public void TargetIsGone()
     {
-        //_currentState = _currentCharacterState.ToString();
+        if (_currentCharacterState is WarriorState)
+        {
+            WarriorState warriorState = (WarriorState)_currentCharacterState;
 
-        //if (StartPatrolState)
-        //{
-        //    StartPatrolState = false;
-
-        //    SetState(new PatrolState(_character, this));
-        //}
+            warriorState.TargetIsGone();
+        }
     }
 }

@@ -7,18 +7,9 @@ public class Character : MonoBehaviour
     protected Rigidbody2D _rbody;
     [SerializeField][Range(0, 60)] protected int _movementSpeed;
 
-    public delegate void SomeAction(Collision2D collision);
-    public event SomeAction OnCollisionEntered;
-
     private void Start()
     {
         Initialize();
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)//
-    {
-        print("Enter");
-        OnCollisionEntered?.Invoke(collision);
     }
 
     protected void Initialize()
@@ -33,7 +24,7 @@ public class Character : MonoBehaviour
         ExecuteCommand(new MoveCommand(_rbody, movementDirection * speed));
     }
 
-    public void RotateTo(Vector3 target)
+    public void RotateTo(Vector2 target)
     {
         ExecuteCommand(new RotationCommand(_rbody.transform, target));
     }
@@ -41,6 +32,11 @@ public class Character : MonoBehaviour
     public void RotateByAngle(float angle)
     {
         ExecuteCommandByValue(new RotationCommand(_rbody.transform), angle);
+    }
+
+    public float RandomAngle(float minAngle, float maxAngle)
+    {
+        return Random.Range(minAngle, maxAngle);
     }
 
     protected void ExecuteCommand(Command command)
